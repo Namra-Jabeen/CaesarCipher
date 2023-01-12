@@ -22,11 +22,11 @@ For encryption of text in textfile:
 ```
 #####Example:
 Input:
-``` bash
+``` 
 7 examples/plaintext.txt
 ```
 Output:
-```bash
+```
 Lewlyplujl pz aol alhjoly vm hss aopunz.
 uv vul pz zv iyhcl aoha ol pz uva kpzabyilk if zvtlaopun bulewljalk p ohk yhaoly il mpyza pu h cpsshnl aohu zljvuk ha Yvtl.
 tlu myllsf ilsplcl aoha dopjo aolf klzpyl,
@@ -40,11 +40,11 @@ For decryption of text in textfile:
 ```
 #####Example:
 Input:
-``` bash
+``` 
 7 examples/ciphertext.txt -d
 ```
 Output:
-```bash
+```
 Experience is the teacher of all things.
 no one is so brave that he is not disturbed by something unexpected i had rather be first in a village than second at Rome.
 men freely believe that which they desire,
