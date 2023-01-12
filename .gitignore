@@ -1,0 +1,5 @@
+#Ignore all generated files
+.DS_Store
+
+#ignore IDE files
+.idea
