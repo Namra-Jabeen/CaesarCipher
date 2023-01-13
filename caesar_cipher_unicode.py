@@ -1,37 +1,33 @@
 
-# cleaning function - To get rid of anything other than uppercase/lowercase letters and spaces.
-# This is not necessary as the encryption and decryption function works regardless.
-def cleaning(raw_text):
-    cleaned_text = ""
-    for i in range(len(raw_text)):
-        ch = raw_text[i]
-        if (ch == " " or ch.islower() or ch.isupper()):
-           cleaned_text += ch
-    return cleaned_text
-
-
 # Encryption function using unicode
-def encrypt(plaintext, n):
+def encrypt(plaintext, key):
+    alphabet_length = 26
     output = ""
     for i in range(len(plaintext)):
-        ch = plaintext[i]
-        if ch == " ":
-            output += ch
-        elif ch.isupper():
-            shifted_character_upper = (ord(ch) + n-65) % 26 + 65
-            # ord() takes a unicode character and returns the corresponding integer
-            # 65 is the integer for the unicode character "A". 65-90 are the integers for A-Z.
-            output += chr(shifted_character_upper) #chr() converts an integer to its unicode character and returns it.
-        elif ch.islower():  # if we know data is cleaned, we can replace elif with else and remove the else statement below.
-            shifted_character_lower = (ord(ch) + n-97) % 26 + 97
-            #97 is the integer for the unicode character "a". 97-122 are the integers representing a-z.
-            output+= chr(shifted_character_lower)
+        character = plaintext[i]
+        if character == " ":
+            output += character
+        elif character.isupper():
+            output += get_shifted_character(character, key, alphabet_length, True)
+        elif character.islower():
+            output += get_shifted_character(character, key, alphabet_length, False)
         else:
-            output+= ch
+            output += character
     return output
 
-def decrypt(ciphertext,n):
-    return encrypt(ciphertext,26-n)
+# Decryption function using the encryption function
+def decrypt(ciphertext,key):
+    alphabet_length = 26
+    return encrypt(ciphertext,alphabet_length-key)
+
+# Auxiliary  function
+def get_shifted_character(character, key, alphabet_length, isUpper):
+    # ord() takes a unicode character and returns the corresponding integer
+    # chr() converts an integer to its unicode character and returns it.
+    if isUpper == True:
+       return chr((ord(character) + key - ord("A")) % alphabet_length + ord("A"))
+    elif isUpper == False:
+       return chr((ord(character) + key - ord("a")) % alphabet_length + ord("a"))
 
 # For handling the entered input
 if __name__ == '__main__':
