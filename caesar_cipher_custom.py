@@ -1,23 +1,24 @@
-def encrypt(plaintext,n,alphabet):
+def encrypt(plaintext,key,alphabet):
     output = ""
     for i in range(len(plaintext)):
-        ch = plaintext[i]
-        if ch in alphabet:
-            idx = alphabet.find(ch)
-            new_idx = (idx + n) % len(alphabet)
-            new_char = alphabet[new_idx]
-            output += new_char
-        elif ch in alphabet.lower():
-            idx = alphabet.find(ch.upper())
-            new_idx = (idx + n) % len(alphabet)
-            new_char = alphabet[new_idx]
-            output += new_char.lower()
+        character = plaintext[i]
+        if character in alphabet:
+            output += get_shifted_character(character,key,alphabet)
+        elif character in alphabet.lower():
+            output += get_shifted_character(character,key,alphabet.lower())
         else:
-            output += ch
+            output += character
     return output
 
 def decrypt(ciphertext,n,alphabet):
     return encrypt(ciphertext, len(alphabet)-n, alphabet)
+
+# Auxiliary function
+def get_shifted_character(character, key, alphabet):
+    index = alphabet.find(character)
+    new_index = (index + key) % len(alphabet)
+    new_character = alphabet[new_index]
+    return new_character
 
 if __name__ == '__main__':
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" # add/remove letters only
